@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <title>黑科技论坛</title>
+</head>
+<body style="padding-top: 100px;">
+<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<div class="container">
+    <div class="row clearfix">
+        <div class="col-md-12 column">
+            <div th:include="head :: head" th:remove="tag"></div>
+            <span th:if="${success_message!=null}">
+                <div class="alert alert-dismissable alert-success">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                    <span th:text="${success_message}"></span>
+                </div>
+            </span>
+            <ul>
+                <h3>热门/置顶</h3>
+
+            </ul>
+            <ul>
+                <li>
+                    <h3>最新</h3>
+                </li>
+                <span th:each="post:${postList}">
+                    <li><h4><a th:href="@{/post/{id}(id=${post.postId})}" th:text="${post.topic}"></a></h4></li>
+                </span>
+            </ul>
+
+            <span th:utext="'第'+${postList.number+1}+'/'+${postList.totalPages}+'页'"></span>
+
+            <span>
+                   <span th:if="${postList.number != 0}">
+                       <a th:href="@{/index(curPage=1)}">[首页]</a>
+                       <a th:href="@{/index(curPage=${postList.number})}">[上一页]</a>
+                   </span>
+
+                   <span th:if="${postList.number+1 != postList.totalPages}">
+                       <a th:href="@{/index(curPage=${postList.number +2})}">[下一页]</a>
+                       <a th:href="@{/index(curPage=${postList.totalPages})}">[尾页]</a>
+                   </span>
+            </span>
+        </div>
+    </div>
+</div>
+</body>
+</html>

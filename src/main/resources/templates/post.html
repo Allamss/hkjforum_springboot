@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>写帖子</title>
+    <link href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body style="padding-top: 100px;">
+<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<div class="container">
+    <div class="row clearfix">
+        <div class="col-md-12 column">
+            <div th:include="head :: head"></div>
+            <span th:if="${verificationErrors ne null}">
+                <div class="alert alert-dismissable alert-danger">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                    <span th:each="verificationError:${verificationErrors}">
+                        <span th:text="${verificationError.defaultMessage}"></span>
+                    </span>
+                </div>
+            </span>
+            <form role="form" th:action="@{/post}" method="post">
+                <div class="form-group">
+                    <input type="text" class="form-control" id="inputTopic" placeholder="标题" name="topic" th:value="(${post})?(${post.topic})"/>
+                </div>
+                <div class="form-group">
+                    <textarea class="form-control" rows="10" name="content" placeholder="正文" th:value="(${post})?(${post.content})"></textarea>
+                </div>
+                <button type="submit" class="btn btn-default">发送</button>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>
