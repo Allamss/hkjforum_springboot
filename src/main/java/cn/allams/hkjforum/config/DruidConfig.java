@@ -11,11 +11,16 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import javax.sql.DataSource;
+import javax.xml.crypto.Data;
 import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * 配置Druid连接池
+ * @author Allams
+ */
 @Configuration
 public class DruidConfig {
 
@@ -25,17 +30,15 @@ public class DruidConfig {
         return new DruidDataSource();
     }
 
-    //配置Druid监控
     /**
      * 1、配置管理后台的Servlet
      */
-
     @Bean
     public ServletRegistrationBean statViewServlet(){
         ServletRegistrationBean bean = new ServletRegistrationBean(new StatViewServlet(),"/druid/*");
         Map<String,String> initParams = new HashMap<>();
-        initParams.put("loginUsername","admin");
-        initParams.put("loginPassword","123467");
+        initParams.put("loginUsername", "admin");
+        initParams.put("loginPassword", "123467");
         //默认允许所有
         initParams.put("allow","");
         bean.setInitParameters(initParams);

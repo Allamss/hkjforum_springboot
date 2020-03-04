@@ -6,6 +6,8 @@ import cn.allams.hkjforum.exception.MyException;
 import cn.allams.hkjforum.repository.PostRepository;
 import cn.allams.hkjforum.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -15,6 +17,7 @@ import org.springframework.stereotype.Service;
  * @author Allams
  */
 
+@CacheConfig(cacheNames = "post")
 @Service
 public class PostServiceImpl implements PostService {
 
@@ -43,6 +46,7 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
+    @Cacheable(value = {"post"}, unless = "#result == null", key = "'post'+#id")
     public Post findPostById(Integer id) throws MyException{
         Post post = postRepository.findById(id).orElse(null);
         if (post != null) {

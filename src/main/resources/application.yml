@@ -2,10 +2,10 @@ spring:
   #数据源
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
-    username: root
-    password: 123467
-    url: jdbc:mysql://localhost:3306/hkjforum?characterEncoding=utf8&serverTimezone=UTC
-    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: ${jdbc.username}
+    password: ${jdbc.password}
+    url: ${jdbc.url}
+    driver-class-name: ${jdbc.driver}
 
     initialSize: 5
     minIdle: 5
@@ -27,6 +27,9 @@ spring:
   #环境
   profiles:
     active: dev
+
+  #缓存
+  redis:
 
   #JPA
   jpa:
