@@ -30,6 +30,9 @@ spring:
 
   #缓存
   redis:
+    host: ${redis.host}
+    port: ${redis.port}
+    password: ${redis.password}
 
   #JPA
   jpa:

@@ -2,6 +2,7 @@ package cn.allams.hkjforum.service;
 
 import cn.allams.hkjforum.HkjforumApplication;
 import cn.allams.hkjforum.entity.Post;
+import cn.allams.hkjforum.repository.PostRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -10,6 +11,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 public class PostServiceTest {
     @Autowired
     PostService postService;
+
+    @Autowired
+    PostRepository postRepository;
 
     @Test
     public void testFindUserById(){
@@ -30,5 +34,7 @@ public class PostServiceTest {
         Post post = postService.findPostById(7);
         System.out.println(post.getTopic());
     }
+
+
 
 }

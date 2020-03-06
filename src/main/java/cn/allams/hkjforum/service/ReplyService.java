@@ -20,6 +20,6 @@ public interface ReplyService {
      * 根据帖子找回复
      * @param postId 帖子id
      */
-    List<Reply> findReplyByPostId(Integer postId);
+    String findReplyByPostId(Integer postId);
 
 }

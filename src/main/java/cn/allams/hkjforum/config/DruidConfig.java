@@ -4,6 +4,7 @@ import com.alibaba.druid.pool.DruidDataSource;
 import com.alibaba.druid.support.http.ResourceServlet;
 import com.alibaba.druid.support.http.StatViewServlet;
 import com.alibaba.druid.support.http.WebStatFilter;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.boot.web.servlet.ServletRegistrationBean;
@@ -24,6 +25,22 @@ import java.util.Map;
 @Configuration
 public class DruidConfig {
 
+    /**
+     * 数据连接池管理页面用户名
+     */
+    @Value("${druid.loginUsername}")
+    String loginUsername;
+    /**
+     * 数据连接池管理页面密码
+     */
+    @Value("${druid.loginPassword}")
+    String loginPassword;
+    /**
+     * 数据连接池管理界面映射url
+     */
+    @Value("${druid.urlMapping}")
+    String urlMapping;
+
     @ConfigurationProperties(prefix = "spring.datasource")
     @Bean
     public DataSource druid(){
@@ -35,10 +52,10 @@ public class DruidConfig {
      */
     @Bean
     public ServletRegistrationBean statViewServlet(){
-        ServletRegistrationBean bean = new ServletRegistrationBean(new StatViewServlet(),"/druid/*");
+        ServletRegistrationBean bean = new ServletRegistrationBean(new StatViewServlet(),urlMapping);
         Map<String,String> initParams = new HashMap<>();
-        initParams.put("loginUsername", "admin");
-        initParams.put("loginPassword", "123467");
+        initParams.put("loginUsername", loginUsername);
+        initParams.put("loginPassword", loginPassword);
         //默认允许所有
         initParams.put("allow","");
         bean.setInitParameters(initParams);

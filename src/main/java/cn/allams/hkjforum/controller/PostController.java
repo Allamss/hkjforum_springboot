@@ -7,6 +7,8 @@ import cn.allams.hkjforum.exception.MyException;
 import cn.allams.hkjforum.service.PostService;
 import cn.allams.hkjforum.service.ReplyService;
 import cn.allams.hkjforum.service.UserService;
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.TypeReference;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
@@ -89,7 +91,8 @@ public class PostController {
         String username = userService.findUserById(post.getUserId()).getUsername();
         model.addAttribute("username", username);
         model.addAttribute("post",post);
-        List<Reply> replyList = replyService.findReplyByPostId(id);
+        String listJson = replyService.findReplyByPostId(id);
+        List<Reply> replyList = (List<Reply>) JSON.parseObject(listJson, new TypeReference<List<Reply>>(){});
         model.addAttribute("replyList", replyList);
 
         return "postdetails";

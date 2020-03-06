@@ -14,10 +14,10 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 /**
+ * 帖子用户逻辑层实现类
  * @author Allams
  */
 
-@CacheConfig(cacheNames = "post")
 @Service
 public class PostServiceImpl implements PostService {
 
@@ -46,7 +46,6 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    @Cacheable(value = {"post"}, unless = "#result == null", key = "'post'+#id")
     public Post findPostById(Integer id) throws MyException{
         Post post = postRepository.findById(id).orElse(null);
         if (post != null) {

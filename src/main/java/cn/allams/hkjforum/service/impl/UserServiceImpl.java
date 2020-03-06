@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
- * 用户业务逻辑层
+ * 用户业务逻辑层实现类
  * @author Allams
  */
 @Service
