@@ -8,6 +8,9 @@ import cn.allams.hkjforum.service.ReplyService;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
@@ -29,6 +32,7 @@ public class ReplyServiceImpl implements ReplyService {
     PostRepository postRepository;
 
     @Override
+    @CacheEvict(value="replys", keyGenerator = "sendReplyKeyGenerator")
     public void sendReply(Reply reply) {
         replyRepository.save(reply);
         Post post = postRepository.findById(reply.getPostId()).orElse(null);
@@ -41,7 +45,7 @@ public class ReplyServiceImpl implements ReplyService {
     }
 
     @Override
-    @Cacheable(value="replys", key="'postId4replys'+#postId", unless = "#result==null", cacheManager = "initRedisCacheManager")
+    @Cacheable(value="replys", key="'postId4replys'+#postId", unless = "#result==null")
     public String findReplyByPostId(Integer postId) {
         List<Reply> list = replyRepository.findReplyByPostId(postId);
         String listJson = JSON.toJSONString(list);
