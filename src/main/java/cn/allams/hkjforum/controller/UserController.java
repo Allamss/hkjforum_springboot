@@ -29,6 +29,7 @@ public class UserController {
 
     // TODO 使用SpringSecurity框架实现用户登录
     // TODO 登陆学号输入过长，浏览器（将学号自动转化为带逗号的字符串导致？）Integer无法校验
+    // TODO 开发完注册后密码使用md5加密存储
     /**
      *
      * @param form 页面传来的账号和密码信息
