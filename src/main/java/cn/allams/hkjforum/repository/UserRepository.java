@@ -18,7 +18,7 @@ public interface UserRepository extends JpaRepository<User,Integer> {
      * @param account 用户名
      * @return 查找到的用户
      */
-    @Query(value = "SELECT * FROM user u WHERE u.account = :account",nativeQuery = true)
+    @Query(value = "SELECT * FROM user u WHERE u.account = :account LIMIT 1",nativeQuery = true)
     User findUserByAccountIs(@Param("account") Integer account);
 
     @Transactional
