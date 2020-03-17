@@ -1,12 +1,12 @@
 package cn.allams.hkjforum.config;
 
-import org.apache.ibatis.session.Configuration;
-import org.mybatis.spring.boot.autoconfigure.ConfigurationCustomizer;
 import org.springframework.context.annotation.Bean;
 
-@org.springframework.context.annotation.Configuration
+import org.springframework.context.annotation.Bean;
+
+//@org.springframework.context.annotation.Configuration
 public class MybatisConfig {
-    @Bean
+    /*@Bean
     public ConfigurationCustomizer configurationCustomizer(){
         return new ConfigurationCustomizer() {
             @Override
@@ -14,5 +14,5 @@ public class MybatisConfig {
                 configuration.setMapUnderscoreToCamelCase(true);
             }
         };
-    }
+    }*/
 }

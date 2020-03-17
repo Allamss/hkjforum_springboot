@@ -13,7 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 
 public interface UserRepository extends JpaRepository<User,Integer> {
-    /**
+     /**
      * 通过账号查询用户
      * @param account 用户名
      * @return 查找到的用户
